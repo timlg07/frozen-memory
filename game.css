@@ -1,0 +1,77 @@
+/* wrapper um div#game mit benötigter Größe (80vw/h und 1080maxpx), dann #game mit 100% width*/
+
+div#game {
+    
+    max-width: 1080px;
+    width : 100vw ;
+    height: 100vh ;
+    margin: auto ;
+    
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-perspective: 1200px;
+            perspective: 1200px;
+    
+}
+
+div.card {
+     
+    z-index: -1  ;
+    float  : left;
+    
+    background:  #5cf;
+    transition: 350ms;
+    transition-delay : background 100ms; 
+    box-shadow: 0 0 6px 1px #f9c;
+    
+}
+
+div.card:hover {
+    box-shadow: 0 0 12px 4px #f9c;
+}
+
+div.card.turned:hover {
+    box-shadow: 0 0 12px 4px #5cf;
+}
+
+div.card.turned {
+    background: #f9c;
+    transform : rotate3d(1,0,0,180deg);
+    box-shadow: 0 0 6px 1px #5cf;
+}
+
+div.card.true {
+    background: #2CCD3A;
+}
+
+div.card.false {
+    background: rgba(232,17,35 ,1)	;
+}
+
+
+/* CARD SIZES */ 
+
+div.card {
+    
+    width :  15vw;
+    height:  15vw;
+    margin:   1vw;
+    
+}
+
+/* Prozentangaben, -> größere Displays, klinere Prozente */
+
+@media( max-width:480px ){
+    
+    div.card {
+        width :  40vw;
+        height:  40vw;
+        margin:   2vw;
+    }
+    
+    div#game {
+        width : 100vw;
+        height: 100vh;
+    }
+    
+}
