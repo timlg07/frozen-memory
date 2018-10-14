@@ -8,16 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="stylesheet" type="text/css" href="game.css">
+    <link rel="stylesheet" type="text/css" href="game.css" >
     <script src="index.js"></script>
+    <script src="color.js"></script>
     
 </head>
 
 <body>
+    <canvas id="overlay"></canvas>
     <div id="startpage">
-        <button id="start" onclick="start()">SPIEL STARTEN</button>
+        <button id="singleplayer" class="start" onclick="start({singleplayer:true})">ALLEINE SPIELEN</button>
+        <button id="multiplayer"  class="start" onclick="start({multiplayer :true})">ZU ZWEIT SPIELEN</button>
     </div>
+    <div class="score" id="score_1">0</div>
+    <div class="score" id="score_2">0</div>
     <div id="game">
-        
     </div>
 </body>
