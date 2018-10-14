@@ -1,4 +1,4 @@
 # frozen-memory
 ### version
-current version: 0.1
-updating to version 0.2
+current version: _0.1_<br>
+updating to version _0.2_
