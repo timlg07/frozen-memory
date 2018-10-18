@@ -7,9 +7,28 @@ var $settings = {
 var $cards  = [];
 var $active = [];
 var $pairs  = [];
+var gamemode= '';
+var turnCount= 1;
+var scores=[0,0];
+var images  = {
+    snow: newImage("snow.png")
+}
+
+function newImage( src ){
+    let i = new Image();
+    i.src = src;
+    return i;
+}
 
 
-function start( ){
+function start( gamemode ){
+    
+    if( gamemode.singleplayer ){ 
+        window.gamemode = 'singlePlayer';
+        document.querySelectorAll("div.score").forEach(o=>o.style.display = "none");
+    } else {
+        window.gamemode = 'multiPlayer' ;
+    }
     
     var gameContainer = document.querySelector( "div#game" );
     for(let i=0; i<$settings.cards; i++){
@@ -60,6 +79,13 @@ function handleCardClick( ){
     }
     if( $active.length === 2 ){
         let isCorrect = checkActive();
+       if( isCorrect && gamemode == 'multiPlayer' ){
+           let player = turnCount%2;
+           document.querySelector("div.score#score_"+(player+1)).innerText = ++scores[player];
+           
+           
+       }
+        turnCount++;
         $active.forEach(o=>o.classList.add(isCorrect.toString()));
         setTimeout(()=>{
             $active.forEach(o=>{
@@ -89,7 +115,83 @@ function checkActive( ){
     return r;
 }
 
+// COLOR //
+
+var colors = [
+    "rgba(   0, 120, 215, .88 )",
+    "rgba( 255, 185,   0, .88 )",
+    "rgba( 232,  17,  35, .88 )",
+    "rgba( 136,  23, 152, .88 )"
+];
+var activecolor = colors[~~( Math.random() * colors.length )];
+
+setInterval( ()=>{
+    activecolor = colors[~~( Math.random() * colors.length )];
+    document.querySelectorAll("div.score").forEach((o)=>o.style.background = activecolor);
+},1000);
 
 
+// Overlay //
+var canvas = {};
+var snow   = [];
+var count  =  0;
+            
+window.onload=()=>{
+    canvas.obj = document.querySelector("canvas#overlay");
+    canvas.context = canvas.obj.getContext("2d");
+    canvas.obj.width  = window.innerWidth;
+    canvas.obj.height = window.innerHeight;
+    
+    setInterval( updateOverlay,16 );
+    
+}
 
 
+function updateOverlay( ){
+    
+    if( snow.length < 7 && count%60 === 0 ){
+        snow.push( new Snowflake() );
+    }
+    
+    count++;
+    canvas.context.clearRect(0,0,canvas.obj.width,canvas.obj.height)
+    
+    snow.forEach(o=>{
+       
+        o.update.call(o);
+        o.draw.call(o);
+        
+    });
+    
+}
+
+class Snowflake {
+    
+    constructor( ){
+        this.y = Math.random() * canvas.obj.height/3;
+        this.x = Math.random() * canvas.obj.width;
+        this.func = Math.random()>.5?Math.sin:Math.cos;
+        this.speed = Math.random()*8+5;
+    }
+    
+    update( ){
+        this.x += this.func(count/this.speed) * canvas.obj.width/200;
+        this.y +=  Math.random() * canvas.obj.height/200;
+        if
+        ( 
+            (this.x >= window.innerWidth )||
+            (this.y >= window.innerHeight)||
+            (this.x <= 0 )
+        ){
+            snow.splice(snow.indexOf( this ),1);
+        }
+    }
+    
+    draw( ){
+       /*
+       canvas.context.fillStyle = "#fff"; canvas.context.fillRect(this.x,this.y,20,20);
+        */
+        canvas.context.drawImage(images.snow,this.x,this.y,20,20);
+        
+    }
+}
