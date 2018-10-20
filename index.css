@@ -8,6 +8,18 @@ body{
 
 }
 
+canvas#overlay {
+    
+    position: fixed;
+    top   : 0 ; 
+    left  : 0 ;
+    right : 0 ; 
+    bottom: 0 ;
+    
+    z-index: 900;
+    pointer-events: none;
+}
+
 div#startpage {
     
     width :  100vw;
@@ -26,7 +38,7 @@ div#startpage {
     
 }
 
-div#startpage > button#start {
+div#startpage > button.start {
     
     padding: 25px;
     border :  0  ;
@@ -34,21 +46,40 @@ div#startpage > button#start {
     outline:  0  ;
     
     position : absolute;
+    width    : 300px;
     left: 50%;
-    top : 50%;
     -webkit-transform: translate( -50%,-50% );
             transform: translate( -50%,-50% );
     
     background: white;
     
-    font-size: 150%;
+    font-size: 20px;
     font-family: "Arial", sans-serif;
     color: rgba(0,153,188 ,1);
     
 }
+div#startpage > button.start#singleplayer {
+    top : 40%;
+}
+div#startpage > button.start#multiplayer {
+    top : 60%;
+}
 
-div#startpage > button#start:hover  ,
-div#startpage > button#start:active {
+@media (max-width:300px){
+    div#startpage > button.start {
+        font-size:  16px;
+        width    : calc(100% - 10px);
+        padding-left:  0;
+        padding-right: 0;
+        left     :   5px;
+        -webkit-transform: translate( 0,0 );
+                transform: translate( 0,0 );
+    }
+}
+
+
+div#startpage > button.start:hover  ,
+div#startpage > button.start:active {
     
     box-shadow: 0 0 10px 2px #D8DFE9;
     background: transparent;
