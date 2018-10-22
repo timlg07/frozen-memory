@@ -14,6 +14,28 @@ div#game {
     
 }
 
+div.score {
+    
+    position: fixed;
+    top     :  50px;
+    left    :  25px;
+    padding :  10px;
+    padding-left   : 30px;
+    padding-right  : 30px;
+    background:#888;
+    transition: background 999ms linear;
+    color   :  #fff;
+    font-size: 300%;
+    font-family: Arial;
+    z-index :  10  ;
+    border-radius  : 20%; 
+    
+}
+
+div.score#score_2 {
+    left: calc(100% - 115px);
+}
+
 div.card {
      
     z-index: -1  ;
@@ -28,6 +50,7 @@ div.card {
 
 div.card:hover {
     box-shadow: 0 0 12px 4px #f9c;
+    z-index: 1000;
 }
 
 div.card.turned:hover {
@@ -59,7 +82,7 @@ div.card {
     
 }
 
-/* Prozentangaben, -> größere Displays, klinere Prozente */
+/* Prozentangaben, -> größere Displays, kleinere Prozente */
 
 @media( max-width:480px ){
     
