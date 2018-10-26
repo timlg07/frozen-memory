@@ -1,3 +1,2 @@
 # frozen-memory
-### version
-current version: 0.2
+### version: 0.2
