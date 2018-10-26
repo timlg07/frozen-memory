@@ -189,10 +189,6 @@ class Snowflake {
     }
     
     draw( ){
-       /*
-       canvas.context.fillStyle = "#fff"; canvas.context.fillRect(this.x,this.y,20,20);
-        */
         canvas.context.drawImage(images.snow,this.x,this.y,this.size,this.size);
-        
     }
 }
