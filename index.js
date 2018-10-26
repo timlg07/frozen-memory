@@ -168,7 +168,8 @@ function updateOverlay( ){
 class Snowflake {
     
     constructor( ){
-        this.y = Math.random() * canvas.obj.height/3;
+        this.size = 20;
+        this.y = -this.size;
         this.x = Math.random() * canvas.obj.width;
         this.func = Math.random()>.5?Math.sin:Math.cos;
         this.speed = Math.random()*8+5;
@@ -191,7 +192,7 @@ class Snowflake {
        /*
        canvas.context.fillStyle = "#fff"; canvas.context.fillRect(this.x,this.y,20,20);
         */
-        canvas.context.drawImage(images.snow,this.x,this.y,20,20);
+        canvas.context.drawImage(images.snow,this.x,this.y,this.size,this.size);
         
     }
 }
