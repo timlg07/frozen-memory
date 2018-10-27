@@ -135,6 +135,7 @@ setInterval( ()=>{
 var canvas = {};
 var snow   = [];
 var count  =  0;
+var overlay= {};
             
 window.onload=()=>{
     canvas.obj = document.querySelector("canvas#overlay");
@@ -142,15 +143,21 @@ window.onload=()=>{
     canvas.obj.width  = window.innerWidth;
     canvas.obj.height = window.innerHeight;
     
-    setInterval( updateOverlay,16 );
+    setInterval( updateOverlay.bind( overlay ),16 );
     
 }
 
 
 function updateOverlay( ){
     
-    if( snow.length < 7 && count%60 === 0 ){
+    this.spawnRate = 80;
+    
+    if( snow.length < 7 && count % this.spawnRate === 0 ){
         snow.push( new Snowflake() );
+    }
+    
+    if( this.spawnRate!= 35 && count > this.spawnRate*7 ){
+        this.spawnRate = 35;
     }
     
     count++;
@@ -158,8 +165,8 @@ function updateOverlay( ){
     
     snow.forEach(o=>{
        
-        o.update.call(o);
         o.draw.call(o);
+        o.update.call(o);
         
     });
     
