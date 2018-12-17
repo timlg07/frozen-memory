@@ -42,10 +42,15 @@ div.card {
     float  : left;
     
     background:  #5cf;
-    transition: 350ms;
-    transition-delay : background 100ms; 
+    background-size:0px;
+    background-position: center;
+    background-repeat  : no-repeat;
+    transition: 000ms background-size  ease 000ms,
+                000ms background-color ease 000ms,
+                500ms transform        ease   0ms,
+                200ms box-shadow       ease   0ms;
     box-shadow: 0 0 6px 1px #f9c;
-    
+    /*backface-visibility: hidden;*/
 }
 
 div.card:hover {
@@ -68,7 +73,15 @@ div.card.true {
 }
 
 div.card.false {
-    background: rgba(232,17,35 ,1)	;
+    background: rgba(232,17,35 ,1);
+}
+
+div.card.turned,
+div.card.true  ,
+div.card.false {
+    background-position: center;
+    background-repeat  : no-repeat;
+    background-size    : 75%;
 }
 
 

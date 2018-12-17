@@ -1,8 +1,14 @@
 var $settings = {
-    
-    cards: 16,
-    
+    cards: 4,
+    time: 1500 //how long you can watch wrong cards until they turn back
 };
+
+
+function newImage( src ){
+    let i = new Image();
+    i.src = src;
+    return i;
+}
 
 var $cards  = [];
 var $active = [];
@@ -11,14 +17,18 @@ var gamemode= '';
 var turnCount= 1;
 var scores=[0,0];
 var images  = {
-    snow: newImage("snow.png")
+    snow : newImage("img/snow.png"),
+    cards: []
 }
 
-function newImage( src ){
-    let i = new Image();
-    i.src = src;
-    return i;
+for(let i=1; i<=$settings.cards/2; i++){
+    images.cards[i-1] = {
+        img:newImage(`img/${i}.png`),
+        isUsed:false,
+        url:`img/${i}.png`
+    };
 }
+
 
 
 function start( gamemode ){
@@ -66,6 +76,13 @@ function makePairs( ){
             // connect with each other
             a[rand].p = a[i   ].e ;
             a[i   ].p = a[rand].e ;
+            // random image which is not used yet
+            let img=~~(Math.random()*images.cards.length);
+            while( images.cards[img].isUsed ) img=~~(Math.random()*images.cards.length);
+            images.cards[img].isUsed = true;
+            // set image
+            a[rand].e.style.backgroundImage = `url(${images.cards[img].url})`;
+            a[rand].p.style.backgroundImage = `url(${images.cards[img].url})`;
         }
     });
     console.log($pairs)
@@ -79,12 +96,10 @@ function handleCardClick( ){
     }
     if( $active.length === 2 ){
         let isCorrect = checkActive();
-       if( isCorrect && gamemode == 'multiPlayer' ){
-           let player = turnCount%2;
-           document.querySelector("div.score#score_"+(player+1)).innerText = ++scores[player];
-           
-           
-       }
+        if( isCorrect && gamemode == 'multiPlayer' ){
+            let player = turnCount%2;
+            document.querySelector("div.score#score_"+(player+1)).innerText = ++scores[player];
+        }
         turnCount++;
         $active.forEach(o=>o.classList.add(isCorrect.toString()));
         setTimeout(()=>{
@@ -99,7 +114,7 @@ function handleCardClick( ){
                 }
             });
             $active = [];
-        },800 );
+        },$settings.time );
     }
 }
 
