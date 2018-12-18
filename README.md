@@ -1,3 +1,3 @@
 # frozen-memory
-### version: 0.2
-### DEMO: tim-greller.tk/ik
+### version: 0.4
+### DEMO: [tim-greller.tk/memory](http://tim-greller.tk/memory)
