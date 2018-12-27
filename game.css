@@ -1,11 +1,11 @@
-/* wrapper um div#game mit benötigter Größe (80vw/h und 1080maxpx), dann #game mit 100% width*/
+﻿/* wrapper um div#game mit benötigter Größe (80vw/h und 1080maxpx), dann #game mit 100% width*/
 
 div#game {
     
-    max-width: 1080px;
-    width : 100vw ;
-    height: 100vh ;
-    margin: auto ;
+    max-width: calc(100vw - 300px);
+    width :    calc(100vw - 300px);
+    height: 100vh;
+    margin: auto;
     
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
@@ -17,13 +17,12 @@ div#game {
 div.score {
     
     position: fixed;
-    top     :  50px;
+    top     : 150px;
     left    :  25px;
     padding :  10px;
     padding-left   : 30px;
     padding-right  : 30px;
     background:#888;
-    transition: background 999ms linear;
     color   :  #fff;
     font-size: 300%;
     font-family: Arial;
@@ -36,10 +35,43 @@ div.score#score_2 {
     left: calc(100% - 115px);
 }
 
+div.player {
+    background-position: center;
+    background-repeat  : no-repeat;
+    background-size    : contain;
+    position: fixed;
+    padding: 0;
+    top   :  50px;
+    width : 100px;
+    height: 100px;
+    z-index: 10  ;
+    transition: display 0ms ease 500ms;
+}
+
+div#player_2 {
+    background-image: url(img/anna.png);
+    left: calc(100% - 120px);
+}
+
+div#player_1 {
+    background-image: url(img/elsa.png);
+    left: 15px;
+}
+
+div.player.invisible {
+    display: none;
+}
+
+div.rainbow {
+    transition: background 999ms linear;
+}
+
+
 div.card {
      
     z-index: -1  ;
     float  : left;
+    margin : auto;
     
     background:  #5cf;
     background-size:0px;
@@ -81,7 +113,7 @@ div.card.true  ,
 div.card.false {
     background-position: center;
     background-repeat  : no-repeat;
-    background-size    : 75%;
+    background-size    : contain;
 }
 
 
