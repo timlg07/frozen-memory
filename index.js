@@ -1,5 +1,5 @@
 var $settings = {
-    cards: 4,
+    cards: 16,
     time: 1500 //how long you can watch wrong cards until they turn back
 };
 
@@ -14,11 +14,13 @@ var $cards  = [];
 var $active = [];
 var $pairs  = [];
 var gamemode= '';
-var turnCount= 1;
+var turnCount= 0;
 var scores=[0,0];
+var $toggle=false;
 var images  = {
     snow : newImage("img/snow.png"),
-    cards: []
+    cards: [],
+    backg: newImage("img/bg.png")
 }
 
 for(let i=1; i<=$settings.cards/2; i++){
@@ -35,10 +37,14 @@ function start( gamemode ){
     
     if( gamemode.singleplayer ){ 
         window.gamemode = 'singlePlayer';
-        document.querySelectorAll("div.score").forEach(o=>o.style.display = "none");
+        document.querySelectorAll("div.score" ).forEach(o=>o.style.display = "none");
+        document.querySelectorAll("div.player").forEach(o=>o.classList.add("invisible"));
+        document.querySelector("div#game").classList.add("singlePlayer")
     } else {
         window.gamemode = 'multiPlayer' ;
     }
+    
+    ANAN_request( window.gamemode );
     
     var gameContainer = document.querySelector( "div#game" );
     for(let i=0; i<$settings.cards; i++){
@@ -55,6 +61,8 @@ function start( gamemode ){
     setTimeout(()=>{
         document.querySelector( "div#startpage" ).style.display = "none";
     },1400);
+    
+    document.querySelector("div#player_2").classList.add("invisible");
     
 }
 
@@ -93,28 +101,41 @@ function handleCardClick( ){
     if( $active.length  <  2 && !this.classList.contains( "turned" )){
         this.classList.add( "turned" );
         $active.push( this );
+    } else {
+        return;
     }
     if( $active.length === 2 ){
         let isCorrect = checkActive();
         if( isCorrect && gamemode == 'multiPlayer' ){
             let player = turnCount%2;
             document.querySelector("div.score#score_"+(player+1)).innerText = ++scores[player];
+        } else {
+            turnCount++;
+            $toggle = true;
         }
-        turnCount++;
         $active.forEach(o=>o.classList.add(isCorrect.toString()));
-        setTimeout(()=>{
-            $active.forEach(o=>{
-                if( o.classList.contains( "false" )){
-                    o.classList.remove(   "turned" );
-                    o.classList.remove(   "false"  );
-                }
-                if( o.classList.contains( "turned" )&& 
-                  ! o.classList.contains( "true"   )){
-                    o.classList.remove(   "turned"  );
-                }
-            });
+        
+        if( checkEnd( )) end();
+        
+        if( ! isCorrect ){
+            setTimeout(()=>{
+                $active.forEach(o=>{
+                    if( o.classList.contains( "false" )){
+                        o.classList.remove(   "turned" );
+                        o.classList.remove(   "false"  );
+                    }
+                    if( o.classList.contains( "turned" )&& 
+                      ! o.classList.contains( "true"   )){
+                        o.classList.remove(   "turned"  );
+                    }
+                });
+                $active = [];
+                if($toggle) document.querySelectorAll("div.player").forEach((o,i,a)=>{o.classList.toggle("invisible")});
+                $toggle = false;
+            },$settings.time );
+        } else {
             $active = [];
-        },$settings.time );
+        }
     }
 }
 
@@ -130,6 +151,7 @@ function checkActive( ){
     return r;
 }
 
+
 // COLOR //
 
 var colors = [
@@ -142,7 +164,7 @@ var activecolor = colors[~~( Math.random() * colors.length )];
 
 setInterval( ()=>{
     activecolor = colors[~~( Math.random() * colors.length )];
-    document.querySelectorAll("div.score").forEach((o)=>o.style.background = activecolor);
+    document.querySelectorAll("div.rainbow").forEach((o)=>o.style.background = activecolor);
 },1000);
 
 
