@@ -172,7 +172,7 @@ function end( ){
     ;
     let e = document.getElementById( "end" );
     e.style.display = "initial";
-    e.innerText = text;    
+    e.innerText = text;
 }
 
 
