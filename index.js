@@ -44,8 +44,6 @@ function start( gamemode ){
         window.gamemode = 'multiPlayer' ;
     }
     
-    ANAN_request( window.gamemode );
-    
     var gameContainer = document.querySelector( "div#game" );
     for(let i=0; i<$settings.cards; i++){
         $cards[i] = document.createElement( "div" );
@@ -149,6 +147,32 @@ function checkActive( ){
         }
     });
     return r;
+}
+
+function checkEnd( ){
+    if( $cards.length == 0 ) return false;
+    let r = true;
+    $cards.forEach(( o,i,a )=>{
+        if( ! o.classList.contains( "true" )) r = false;
+    });
+    return r;
+}
+
+function end( ){
+    let text = (gamemode == 'multiPlayer'
+             ? (
+                    scores[0] == scores[1]
+                    ? "Unentschieden!"
+                    : scores[0]>scores[1]
+                        ? "Elsa hat gewonnen!"
+                        : "Anna hat gewonnen!"
+                )
+             : "Du hast gewonnen!"
+            )+ "\n\n Klicke um noch mal zu spielen!"
+    ;
+    let e = document.getElementById( "end" );
+    e.style.display = "initial";
+    e.innerText = text;    
 }
 
 
