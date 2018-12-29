@@ -1,4 +1,4 @@
-﻿/* wrapper um div#game mit benötigter Größe (80vw/h und 1080maxpx), dann #game mit 100% width*/
+/* wrapper um div#game mit benötigter Größe (80vw/h und 1080maxpx), dann #game mit 100% width*/
 
 div#game {
     
@@ -142,4 +142,31 @@ div.card {
         height: 100vh;
     }
     
+}
+
+#end{
+    display: none;
+    
+    position: fixed;
+    top     :  50% ;
+    left    :  50% ;
+    transform: translate(-50%,-50%);
+    z-index : 99999; 
+    
+    padding: 50px;
+    border-radius: 20px;
+    
+    font-size: 30px;
+    font-family: "arial";
+    text-align: center;
+    
+    color: #fff;
+    background: #a5a;
+    box-shadow: 25px 25px 25px 8px #111;
+    
+    cursor: pointer;
+}
+
+#end:hover{
+    background: #f9c;
 }
