@@ -2,7 +2,7 @@
 
 <head>
     
-    <title>FROUSÄHN</title>
+    <title>Frozen Memory</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,12 +15,15 @@
 
 <body>
     <canvas id="overlay"></canvas>
+    <div id="end" class="rainbow" onClick="window.location.reload()"></div>
     <div id="startpage">
         <button id="singleplayer" class="start" onclick="start({singleplayer:true})">ALLEINE SPIELEN</button>
         <button id="multiplayer"  class="start" onclick="start({multiplayer :true})">ZU ZWEIT SPIELEN</button>
     </div>
-    <div class="score" id="score_1">0</div>
-    <div class="score" id="score_2">0</div>
+    <div class="score rainbow" id="score_1">0</div>
+    <div class="player" id="player_1"></div>
+    <div class="score rainbow" id="score_2">0</div>
+    <div class="player" id="player_2"></div>
     <div id="game">
     </div>
 </body>
