@@ -121,13 +121,13 @@ function handleCardClick( ){
                         o.classList.remove(   "turned" );
                         o.classList.remove(   "false"  );
                     }
-                    if( o.classList.contains( "turned" )&& 
+                    if( o.classList.contains( "turned" )&&
                       ! o.classList.contains( "true"   )){
                         o.classList.remove(   "turned"  );
                     }
                 });
                 $active = [];
-                if($toggle) document.querySelectorAll("div.player").forEach((o,i,a)=>{o.classList.toggle("invisible")});
+                if($toggle && window.gamemode == 'multiPlayer') document.querySelectorAll("div.player").forEach((o,i,a)=>{o.classList.toggle("invisible")});
                 $toggle = false;
             },$settings.time );
         } else {
