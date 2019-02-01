@@ -19,8 +19,7 @@ var scores=[0,0];
 var $toggle=false;
 var images  = {
     snow : newImage("img/snow.png"),
-    cards: [],
-    backg: newImage("img/bg.png")
+    cards: []
 }
 
 for(let i=1; i<=$settings.cards/2; i++){
