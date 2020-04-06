@@ -49,12 +49,12 @@ div.player {
 }
 
 div#player_2 {
-    background-image: url(img/anna.png);
+    background-image: url(../img/anna.png);
     left: calc(100% - 120px);
 }
 
 div#player_1 {
-    background-image: url(img/elsa.png);
+    background-image: url(../img/elsa.png);
     left: 15px;
 }
 
